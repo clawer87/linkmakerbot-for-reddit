@@ -5,7 +5,7 @@ import re
 import os
 import time
 
-LINK_URL="xkcd.com"
+LINK_URL="https://xkcd.com"
 SUBREDDIT_NAME="xkcd"
 SEARCH_STRING=r"xkcd \d+"
 DEBUG=1
@@ -23,7 +23,7 @@ def check_for_string(searchString,comment):
             temp = linkNum.split()
             temp = temp[-1]
             temp = int(temp)
-            myreply+="\n\nhttps://xkcd.com/%d" %temp
+            myreply+="\n\n%s/%d" %(LINK_URL,temp)
     return myreply
 
 # Create the Reddit instance
@@ -67,7 +67,6 @@ for submission in subreddit.hot(limit=5):
     for thisComment in submission.comments:
         #time.sleep(2)
         if thisComment.id not in posts_replied_to:
-
             myreply = check_for_string(SEARCH_STRING,thisComment.body)
             if myreply:
                 if DEBUG:
