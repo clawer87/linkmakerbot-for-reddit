@@ -9,7 +9,9 @@ This python script is a simple bot for detecting a string in a post or comment, 
 
 ## Running
 Open linkmakerbot.py and modify the 4 settings at the top as needed.
+
 Change DEBUG to 0
+
 Run pyton linkmakerbot.py
 
 ## Reccomendations
