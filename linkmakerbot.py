@@ -48,9 +48,9 @@ for submission in subreddit.hot(limit=5):
         # Do a case insensitive search
         myreply = check_for_string(r'xkcd \d+',submission.title)
         if myreply:
-            print(myreply)
+            #print(myreply)
             # Reply to the post
-            #submission.reply(myreply)
+            submission.reply(myreply)
             tempMessage="Bot replying to: %s with ID: %s" %(submission.title,submission.id)
             print(tempMessage)
             #print("Waiting so we don't exceed rate limit...")
@@ -63,9 +63,9 @@ for submission in subreddit.hot(limit=5):
 
             myreply = check_for_string(r'xkcd \d+',thisComment.body)
             if myreply:
-                print(myreply)
+                #print(myreply)
                 # Reply to the comment
-                #thisComment.reply(myreply)
+                thisComment.reply(myreply)
                 tempMessage="Bot replying to a comment in: %s with ID: %s" %(submission.title,thisComment.id)
                 print(tempMessage)
                 #print("Waiting so we don't exceed rate limit...")
