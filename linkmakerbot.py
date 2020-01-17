@@ -7,7 +7,7 @@ import time
 
 LINK_URL="xkcd.com"
 SUBREDDIT_NAME="xkcd"
-SEARCH_STRING=r"xkcd\d+"
+SEARCH_STRING=r"xkcd \d+"
 DEBUG=1
 
 def check_for_string(searchString,comment):
