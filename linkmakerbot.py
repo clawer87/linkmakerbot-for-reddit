@@ -5,6 +5,11 @@ import re
 import os
 import time
 
+LINK_URL="xkcd.com"
+SUBREDDIT_NAME="xkcd"
+SEARCH_STRING=r"xkcd\d+"
+DEBUG=1
+
 def check_for_string(searchString,comment):
     temp = re.findall(searchString, comment, flags=re.IGNORECASE)
     res = list(temp)
@@ -40,17 +45,19 @@ else:
         posts_replied_to = list(filter(None, posts_replied_to))
 
 # Get the top 5 values from our subreddit
-subreddit = reddit.subreddit('pythonforengineers')
+subreddit = reddit.subreddit(SUBREDDIT_NAME)
 for submission in subreddit.hot(limit=5):
     #time.sleep(2)
     # If we haven't replied to this post before
     if submission.id not in posts_replied_to:
         # Do a case insensitive search
-        myreply = check_for_string(r'xkcd \d+',submission.title)
+        myreply = check_for_string(SEARCH_STRING,submission.title)
         if myreply:
-            #print(myreply)
-            # Reply to the post
-            submission.reply(myreply)
+            if DEBUG:
+                print(myreply)
+            else:
+                # Reply to the post
+                submission.reply(myreply)
             tempMessage="Bot replying to: %s with ID: %s" %(submission.title,submission.id)
             print(tempMessage)
             #print("Waiting so we don't exceed rate limit...")
@@ -61,11 +68,13 @@ for submission in subreddit.hot(limit=5):
         #time.sleep(2)
         if thisComment.id not in posts_replied_to:
 
-            myreply = check_for_string(r'xkcd \d+',thisComment.body)
+            myreply = check_for_string(SEARCH_STRING,thisComment.body)
             if myreply:
-                #print(myreply)
-                # Reply to the comment
-                thisComment.reply(myreply)
+                if DEBUG:
+                    print(myreply)
+                else:
+                    # Reply to the comment
+                    thisComment.reply(myreply)
                 tempMessage="Bot replying to a comment in: %s with ID: %s" %(submission.title,thisComment.id)
                 print(tempMessage)
                 #print("Waiting so we don't exceed rate limit...")
