@@ -26,7 +26,7 @@ else:
 # Get the top 5 values from our subreddit
 subreddit = reddit.subreddit('xkcd')
 for submission in subreddit.hot(limit=1):
-    time.sleep(2)
+    #time.sleep(2)
     # If we haven't replied to this post before
     if submission.id not in posts_replied_to:
         # Do a case insensitive search
@@ -48,12 +48,12 @@ for submission in subreddit.hot(limit=1):
             submission.reply(myreply)
             tempMessage="Bot replying to: %s with ID: %s" %(submission.title,submission.id)
             print(tempMessage)
-            print("Waiting so we don't exceed rate limit...")
+            #print("Waiting so we don't exceed rate limit...")
             posts_replied_to.append(submission.id)
-            time.sleep(31)
+            #time.sleep(31)
 
     for thisComment in submission.comments:
-        time.sleep(2)
+        #time.sleep(2)
         if thisComment.id not in posts_replied_to:
             temp = re.findall(r'xkcd \d+', thisComment.body, flags=re.IGNORECASE)
             res = list(temp)
@@ -73,9 +73,9 @@ for submission in subreddit.hot(limit=1):
                 thisComment.reply(myreply)
                 tempMessage="Bot replying to a comment in: %s with ID: %s" %(submission.title,thisComment.id)
                 print(tempMessage)
-                print("Waiting so we don't exceed rate limit...")
+                #print("Waiting so we don't exceed rate limit...")
                 posts_replied_to.append(thisComment.id)
-                time.sleep(31)
+                #time.sleep(31)
 
 # Write our updated list back to the file
 with open("posts_replied_to.txt", "w") as f:
