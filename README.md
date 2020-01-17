@@ -12,3 +12,13 @@ Run pyton linkmakerbot.py
 
 ## Reccomendations
 Add a cron job to run the script regularly.
+
+## To Do
+- Add error handling
+- Make it easier to customize the subreddit and the search string
+- Code cleaning
+
+## Notes
+Praw should regulate how frequently requests are made so you don't exceed the limit set by Reddit.  However, it is different depending on the account age and karma.  Therefore, it may take time for this script to be useful on a new account.
+
+Also, this script was hacked together in about 10 mins, and is by no means professional.  Recommend modifications and use this as a quick base.
