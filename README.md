@@ -19,7 +19,7 @@ Add a cron job to run the script regularly.
 
 ## To Do
 - Add error handling
-- Make it easier to customize the subreddit and the search string
+- ~~Make it easier to customize the subreddit and the search string~~
 - Code cleaning
 
 ## Notes
