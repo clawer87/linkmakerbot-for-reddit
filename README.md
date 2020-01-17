@@ -22,3 +22,5 @@ Add a cron job to run the script regularly.
 Praw should regulate how frequently requests are made so you don't exceed the limit set by Reddit.  However, it is different depending on the account age and karma.  Therefore, it may take time for this script to be useful on a new account.
 
 Also, this script was hacked together in about 10 mins, and is by no means professional.  Recommend modifications and use this as a quick base.
+
+This code is based on the work found at https://github.com/shantnu/RedditBot/
