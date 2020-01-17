@@ -5,6 +5,22 @@ import re
 import os
 import time
 
+def check_for_string(searchString,comment):
+    temp = re.findall(searchString, comment, flags=re.IGNORECASE)
+    res = list(temp)
+    myreply=""
+    if len(res)!=0:
+        if len(res)>1:
+            myreply="Let me make those links for you:"
+        else:
+            myreply="Let me make that link for you:"
+        for linkNum in res:
+            temp = linkNum.split()
+            temp = temp[-1]
+            temp = int(temp)
+            myreply+="\n\nhttps://xkcd.com/%d" %temp
+    return myreply
+
 # Create the Reddit instance
 reddit = praw.Reddit('bot1')
 
@@ -24,28 +40,17 @@ else:
         posts_replied_to = list(filter(None, posts_replied_to))
 
 # Get the top 5 values from our subreddit
-subreddit = reddit.subreddit('xkcd')
-for submission in subreddit.hot(limit=1):
+subreddit = reddit.subreddit('pythonforengineers')
+for submission in subreddit.hot(limit=5):
     #time.sleep(2)
     # If we haven't replied to this post before
     if submission.id not in posts_replied_to:
         # Do a case insensitive search
-        temp = re.findall(r'xkcd \d+', submission.title, flags=re.IGNORECASE)
-        res = list(temp)
-        if len(res)!=0:
-            myreply=""
-            if len(res)>1:
-                myreply="Let me make those links for you:"
-            else:
-                myreply="Let me make that link for you:"
-            for linkNum in res:
-                temp = linkNum.split()
-                temp = temp[-1]
-                temp = int(temp)
-                myreply+="\n\nhttps://xkcd.com/%d" %temp
-            #print(myreply)
+        myreply = check_for_string(r'xkcd \d+',submission.title)
+        if myreply:
+            print(myreply)
             # Reply to the post
-            submission.reply(myreply)
+            #submission.reply(myreply)
             tempMessage="Bot replying to: %s with ID: %s" %(submission.title,submission.id)
             print(tempMessage)
             #print("Waiting so we don't exceed rate limit...")
@@ -55,22 +60,12 @@ for submission in subreddit.hot(limit=1):
     for thisComment in submission.comments:
         #time.sleep(2)
         if thisComment.id not in posts_replied_to:
-            temp = re.findall(r'xkcd \d+', thisComment.body, flags=re.IGNORECASE)
-            res = list(temp)
-            if len(res)!=0:
-                myreply=""
-                if len(res)>1:
-                    myreply="Let me make those links for you:"
-                else:
-                    myreply="Let me make that link for you:"
-                for linkNum in res:
-                    temp = linkNum.split()
-                    temp = temp[-1]
-                    temp = int(temp)
-                    myreply+="\n\nhttps://xkcd.com/%d" %temp
-                #print(myreply)
+
+            myreply = check_for_string(r'xkcd \d+',thisComment.body)
+            if myreply:
+                print(myreply)
                 # Reply to the comment
-                thisComment.reply(myreply)
+                #thisComment.reply(myreply)
                 tempMessage="Bot replying to a comment in: %s with ID: %s" %(submission.title,thisComment.id)
                 print(tempMessage)
                 #print("Waiting so we don't exceed rate limit...")
