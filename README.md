@@ -1,6 +1,8 @@
 # Linkmaker Bot for Reddit
 This python script is a simple bot for detecting a string in a post or comment, and replies with a link based on that string.
 
+If you're interested in this project, check out this one: https://github.com/joeyvanlierop/xkcdbot.  It looks more robust.
+
 ## Installation
 - Ensure python and pip are installed.
 - Run pip install praw
